@@ -9,6 +9,8 @@ FILES_LINK=`jq -r '.pull_request._links.self.href' "$GITHUB_EVENT_PATH"`/files
 echo "Files = $FILES_LINK"
 
 curl $FILES_LINK > files.json
+echo "FILES: "
+cat files.json
 FILES_URLS_STRING=`jq -r '.[].raw_url' files.json`
 
 readarray -t URLS <<<"$FILES_URLS_STRING"
